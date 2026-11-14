@@ -216,15 +216,38 @@ nav.top ul a:hover::after{transform:scaleX(1)}
 .cub.hi .tp{background:#E8FDB0}
 .target{position:absolute;left:-10px;right:-10px;bottom:72%;height:0;border-top:2px dashed var(--ok);transform:translateZ(10px)}
 .target::after{content:"target";position:absolute;right:0;top:-18px;font-family:var(--font-mono);font-size:.62rem;color:var(--ok)}
-/* coin */
-.coin{position:relative;width:170px;height:170px;transform-style:preserve-3d;animation:flip 7s ease-in-out infinite}
-@keyframes flip{0%,35%{transform:rotateY(0)}50%,85%{transform:rotateY(180deg)}100%{transform:rotateY(360deg)}}
-.coin .face{position:absolute;inset:0;border-radius:50%;display:grid;place-content:center;text-align:center;gap:2px;backface-visibility:hidden;border:3px solid var(--accent);background:radial-gradient(circle at 35% 30%, #0F3A2E, #04140F 70%);box-shadow:0 0 40px -6px var(--glow), inset 0 0 0 8px rgba(46,230,166,.12)}
-.coin .face b{font-family:var(--font-display);font-size:1.6rem;color:var(--accent)}
-.coin .face small{font-family:var(--font-mono);font-size:.62rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
-.coin .face span{font-size:.75rem;color:var(--fg);max-width:12ch;margin:0 auto}
-.coin .back{transform:rotateY(180deg)}
-.coin .back b{color:var(--ok)}
+/* awards */
+.awards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.award{position:relative;padding:22px 20px 18px;border-radius:18px;display:flex;flex-direction:column;gap:8px;min-width:0;overflow:hidden;transition:transform .25s ease, box-shadow .25s ease}
+.award::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--accent),var(--teal),var(--violet))}
+.award:hover{box-shadow:0 20px 50px -25px var(--glow)}
+.aw-ic{font-size:1.8rem;width:52px;height:52px;display:grid;place-items:center;border-radius:14px;background:rgba(46,230,166,.10);border:1px solid var(--line);animation:awfloat 4s ease-in-out infinite}
+.award:nth-child(2) .aw-ic{animation-delay:-1s}.award:nth-child(3) .aw-ic{animation-delay:-2s}.award:nth-child(4) .aw-ic{animation-delay:-3s}
+@keyframes awfloat{50%{transform:translateY(-6px)}}
+.aw-n{font-family:var(--font-display);font-weight:800;font-size:var(--step-2);background:linear-gradient(90deg,var(--fg),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.1}
+.award h3{font-family:var(--font-body);font-size:var(--step-0);font-weight:700}
+.award p{color:var(--muted);font-size:.9rem;margin:0;flex:1}
+@media (max-width:980px){.awards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.awards{grid-template-columns:1fr}}
+@media (prefers-reduced-motion: reduce){.aw-ic{animation:none}}
+/* certification prism: 3 badges rotating */
+.prism{position:relative;width:180px;height:180px;transform-style:preserve-3d;animation:prism 12s cubic-bezier(.6,0,.2,1) infinite}
+@keyframes prism{0%,22%{transform:translateZ(-52px) rotateY(0)}33%,55%{transform:translateZ(-52px) rotateY(-120deg)}66%,88%{transform:translateZ(-52px) rotateY(-240deg)}100%{transform:translateZ(-52px) rotateY(-360deg)}}
+.prism .pf{position:absolute;inset:0;border-radius:18px;display:grid;place-content:center;text-align:center;gap:4px;padding:12px;backface-visibility:hidden;border:2px solid var(--accent);background:radial-gradient(circle at 35% 25%, #0F3A2E, #04140F 75%);box-shadow:0 0 40px -8px var(--glow), inset 0 0 0 6px rgba(46,230,166,.10)}
+.prism .pf:nth-child(1){transform:rotateY(0deg) translateZ(52px)}
+.prism .pf:nth-child(2){transform:rotateY(120deg) translateZ(52px);border-color:var(--teal)}
+.prism .pf:nth-child(3){transform:rotateY(240deg) translateZ(52px);border-color:var(--violet)}
+.prism .pf b{font-family:var(--font-display);font-size:1.7rem;color:var(--accent);line-height:1.1}
+.prism .pf:nth-child(2) b{color:var(--teal)}
+.prism .pf:nth-child(3) b{color:var(--violet)}
+.prism .pf small{font-family:var(--font-mono);font-size:.62rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.prism .pf span{font-size:.78rem;color:var(--fg)}
+.prism .pf i{font-style:normal;font-size:1.4rem}
+.cert-dots{display:flex;gap:8px;justify-content:center;margin-top:14px}
+.cert-dots span{width:8px;height:8px;border-radius:50%;background:var(--line);animation:cdot 12s infinite}
+.cert-dots span:nth-child(2){animation-delay:-8s}.cert-dots span:nth-child(3){animation-delay:-4s}
+@keyframes cdot{0%,30%{background:var(--accent);transform:scale(1.3)}33%,100%{background:var(--line);transform:none}}
+@media (prefers-reduced-motion: reduce){.prism,.cert-dots span{animation:none}}
 .contact{grid-template-columns:1fr}
 @media (max-width:860px){
   .sgrid{grid-template-columns:1fr}
@@ -488,6 +511,7 @@ footer{padding-block:28px 40px;color:var(--muted);font-size:.88rem;border-top:1p
           <li><a href="#experience">Experience</a></li>
           <li><a href="#education">Education</a></li>
           <li><a href="#certifications">Certifications</a></li>
+          <li><a href="#awards">Awards</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
@@ -766,7 +790,7 @@ footer{padding-block:28px 40px;color:var(--muted);font-size:.88rem;border-top:1p
     </section>
 
     <section id="certifications" aria-labelledby="cert-h">
-      <div class="shead reveal"><h2 id="cert-h">Certifications</h2><span class="label">Credentials &amp; awards</span></div>
+      <div class="shead reveal"><h2 id="cert-h">Certifications</h2><span class="label">Credentials &amp; learning</span></div>
       <div class="sgrid">
       <div class="timeline">
         <div class="titem glass reveal">
@@ -779,14 +803,6 @@ footer{padding-block:28px 40px;color:var(--muted);font-size:.88rem;border-top:1p
           <div class="trow"><h3>Data Analytics Job Simulation</h3><span class="when">Deloitte · Forage · 2026</span></div>
         </div>
         <div class="titem glass reveal">
-          <div class="trow"><h3>Awards &amp; recognition</h3></div>
-          <ul class="list">
-            <li>Best Organiser for a university technical event with 200 attendees</li>
-            <li>National certificate for creative writing among 1,000 participants</li>
-            <li>Certificate of appreciation for social responsibility through volunteering</li>
-          </ul>
-        </div>
-        <div class="titem glass reveal">
           <div class="trow"><h3>Now learning</h3></div>
           <div class="learning">
             <div><strong>Power BI DAX</strong><span>Measures for margin, year-on-year and rankings</span></div>
@@ -795,10 +811,44 @@ footer{padding-block:28px 40px;color:var(--muted);font-size:.88rem;border-top:1p
           </div>
         </div>
       </div>
-        <aside class="side3d glass" aria-label="Flipping certification badge">
-          <div class="scene3d"><div class="coin"><div class="face front"><small>Forage · 2026</small><b>BCG X</b><span>GenAI</span></div><div class="face back"><small>Forage · 2026</small><b>Tata · Deloitte</b><span>Data Analytics</span></div></div></div>
+        <aside class="side3d glass" aria-label="Rotating certification badges: BCG X, Tata, Deloitte">
+          <div class="scene3d"><div class="prism"><div class="pf"><i>🤖</i><b>BCG X</b><span>GenAI Job Simulation</span><small>Forage · 2026</small></div><div class="pf"><i>📊</i><b>Tata</b><span>GenAI Data Analytics</span><small>Forage · 2026</small></div><div class="pf"><i>📈</i><b>Deloitte</b><span>Data Analytics</span><small>Forage · 2026</small></div></div></div><div class="cert-dots" aria-hidden="true"><span></span><span></span><span></span></div>
           <p class="cap3d">Job simulations · verified on Forage</p>
         </aside>
+      </div>
+    </section>
+
+    <section id="awards" aria-labelledby="awards-h">
+      <div class="shead reveal"><h2 id="awards-h">Awards &amp; recognition</h2><span class="label">Beyond the CV</span></div>
+      <div class="awards">
+        <article class="award glass reveal tilt">
+          <div class="aw-ic" aria-hidden="true">🏆</div>
+          <div class="aw-n">200</div>
+          <h3>Best Organiser</h3>
+          <p>Recognised for coordinating a university-level technical event with 200 attendees.</p>
+          <span class="label">University</span>
+        </article>
+        <article class="award glass reveal tilt">
+          <div class="aw-ic" aria-hidden="true">✍️</div>
+          <div class="aw-n">1,000</div>
+          <h3>National creative writing certificate</h3>
+          <p>Awarded a national certificate for creative writing among 1,000 participants.</p>
+          <span class="label">National</span>
+        </article>
+        <article class="award glass reveal tilt">
+          <div class="aw-ic" aria-hidden="true">🤝</div>
+          <div class="aw-n">Community</div>
+          <h3>Social responsibility</h3>
+          <p>Certificate of appreciation for volunteering and social responsibility work.</p>
+          <span class="label">Volunteering</span>
+        </article>
+        <article class="award glass reveal tilt">
+          <div class="aw-ic" aria-hidden="true">⭐</div>
+          <div class="aw-n">Top 5%</div>
+          <h3>Superstar Award ×2 · Currys Ireland</h3>
+          <p>Ranked in the top 5% of 300+ colleagues nationally and selected for the Top Squad Team.</p>
+          <span class="label">Work</span>
+        </article>
       </div>
     </section>
 
